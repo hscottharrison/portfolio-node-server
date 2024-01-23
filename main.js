@@ -9,6 +9,7 @@ app.use(express.urlencoded({ extended: true }));
 
 app.post('/mailer', (req, res) => {
   sgMail.setApiKey(process.env.SENDGRID_API_KEY)
+  console.log('KEY', process.env.SENDGRID_API_KEY);
   const msg = {
     from: 'hunter@codadevelopment.net',
     to: 'hunter@codadevelopment.net',
