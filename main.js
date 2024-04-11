@@ -1,11 +1,16 @@
 const express = require("express");
 const cors = require("cors");
 const sgMail = require('@sendgrid/mail')
+const path = require("path");
 
 const app = express();
 app.use(cors());
-
+app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.urlencoded({ extended: true }));
+
+app.get('/', async(req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'index.html'));
+});
 
 app.post('/mailer', (req, res) => {
   sgMail.setApiKey(process.env.SENDGRID_API_KEY)
